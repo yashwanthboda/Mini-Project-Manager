@@ -7,6 +7,15 @@ export default function ScheduleResult({ result, onReset }) {
     });
   };
 
+  // Add defensive check for missing metrics
+  if (!result || !result.metrics) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+        <p className="text-red-700">Error: Invalid schedule result format</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Success Message */}
@@ -19,7 +28,7 @@ export default function ScheduleResult({ result, onReset }) {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-green-900">Schedule Generated!</h2>
-            <p className="text-green-700 mt-1">{result.message}</p>
+            <p className="text-green-700 mt-1">{result.message || 'Tasks scheduled successfully'}</p>
           </div>
         </div>
       </div>
@@ -28,15 +37,15 @@ export default function ScheduleResult({ result, onReset }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
           <div className="text-sm text-gray-600 mb-1">Total Tasks</div>
-          <div className="text-3xl font-bold text-gray-900">{result.metrics.totalTasks}</div>
+          <div className="text-3xl font-bold text-gray-900">{result.metrics?.totalTasks || 0}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
           <div className="text-sm text-gray-600 mb-1">Total Hours</div>
-          <div className="text-3xl font-bold text-gray-900">{result.metrics.totalEstimatedHours}h</div>
+          <div className="text-3xl font-bold text-gray-900">{result.metrics?.totalEstimatedHours || 0}h</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
           <div className="text-sm text-gray-600 mb-1">Start Date</div>
-          <div className="text-lg font-bold text-gray-900">{formatDate(result.metrics.earliestDueDate)}</div>
+          <div className="text-lg font-bold text-gray-900">{result.metrics?.earliestDueDate ? formatDate(result.metrics.earliestDueDate) : 'N/A'}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
           <div className="text-sm text-gray-600 mb-1">End Date</div>
