@@ -257,39 +257,7 @@ Mini-Project-Manager/
 | **Deployment** | GitHub Pages, Render (Docker) |
 | **CI/CD** | GitHub Actions |
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the ISC License.
-
 ## 👨‍💻 Author
 
 **Yashwanth Boda**
 - GitHub: [@yashwanthboda](https://github.com/yashwanthboda)
-
-## 🙏 Acknowledgments
-
-- React team for the amazing framework
-- Microsoft for ASP.NET Core
-- Tailwind CSS for the utility-first CSS framework
-- Render for free hosting services
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-1. Check the [Issues](https://github.com/yashwanthboda/Mini-Project-Manager/issues) page
-2. Review the deployment guides in the repository
-3. Open a new issue with detailed information
-
----
-
-**⭐ If you find this project useful, please consider giving it a star!**
