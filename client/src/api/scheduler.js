@@ -16,14 +16,25 @@ export const scheduleTasks = async (projectId, tasks) => {
     console.warn('Scheduler service not available. Using simple ordering.');
     
     // Simple fallback: return tasks in the order they were provided
+    // Match the exact response structure from server.js
+    const metrics = {
+      totalTasks: tasks.length,
+      totalEstimatedHours: tasks.reduce((sum, task) => sum + (task.estimatedHours || 0), 0),
+      earliestDueDate: tasks.reduce((earliest, task) => {
+        const dueDate = new Date(task.dueDate);
+        return dueDate < earliest ? dueDate : earliest;
+      }, new Date(tasks[0]?.dueDate || Date.now())),
+      latestDueDate: tasks.reduce((latest, task) => {
+        const dueDate = new Date(task.dueDate);
+        return dueDate > latest ? dueDate : latest;
+      }, new Date(tasks[0]?.dueDate || Date.now()))
+    };
+    
     return {
-      success: true,
-      schedule: tasks.map((task, index) => ({
-        ...task,
-        order: index + 1,
-        scheduledDate: new Date().toISOString()
-      })),
-      message: 'Tasks ordered (scheduler service not deployed)'
+      projectId,
+      recommendedOrder: tasks.map(task => task.title || task.name),
+      metrics,
+      message: 'Tasks ordered (scheduler service not deployed - using simple ordering)'
     };
   } catch (error) {
     if (error.response) {
