@@ -250,9 +250,6 @@ const ProjectScheduler = () => {
                   <span>🚀 Generate Smart Schedule</span>
                 )}
               </button>
-              <p className="mt-3 text-sm text-gray-500">
-                AI will analyze your tasks and create an optimized schedule
-              </p>
             </div>
           )}
         </div>
