@@ -5,13 +5,13 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["ProjectManager.csproj", "./"]
-RUN dotnet restore "ProjectManager.csproj"
+COPY *.csproj ./
+RUN dotnet restore
 COPY . .
-RUN dotnet build "ProjectManager.csproj" -c Release -o /app/build
+RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ProjectManager.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
