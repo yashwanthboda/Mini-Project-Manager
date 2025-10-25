@@ -5,8 +5,27 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors());
+// Configure CORS
+const allowedOrigins = [
+  'http://localhost:5173', // Local development
+  'https://yashwanthboda.github.io', // Production frontend
+  process.env.FRONTEND_URL // Optional: from environment variable
+].filter(Boolean);
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Topological Sort Algorithm for Task Dependencies
