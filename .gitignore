@@ -1,8 +1,22 @@
 node_modules/
 .env
+.env.local
+.env.production.local
 *.log
 .DS_Store
 dist/
 build/
 .vscode/
 .idea/
+
+# Backend
+backend/bin/
+backend/obj/
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+backend/out/
+
+# Client
+client/dist/
+client/.vite/
